@@ -34,7 +34,12 @@ body, div.container {
 .page-splash 	{ background:white; color: black; }
 .page-location 	{ background:$color;  }
 
-select.form-control { background-color: #EA8B8B; color: $offwhite; margin-top:3em; border: 1px solid $borderclr}
+select.form-control { background-color: #EA8B8B; 
+						color: $offwhite;
+						height: 2.0em;
+						font-size: 1.8em;
+						margin-top:3em; 
+						border: 1px solid $borderclr}
 hr { border-top: 1px solid $borderclr}
 
 a.navbar-brand, a.navbar-brand:hover {
@@ -42,6 +47,7 @@ a.navbar-brand, a.navbar-brand:hover {
 	color: $offwhite !important;
 	
 	}
+nav li a { font-size: 2em;}
 	
 .bigheader {
 	h1 {

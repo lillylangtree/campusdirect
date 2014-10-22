@@ -44,6 +44,8 @@ body, div.container {
 select.form-control {
   background-color: #EA8B8B;
   color: antiquewhite;
+  height: 2.0em;
+  font-size: 1.8em;
   margin-top: 3em;
   border: 1px solid #ca5959;
 }
@@ -55,6 +57,10 @@ hr {
 a.navbar-brand, a.navbar-brand:hover {
   font-family: 'Rock Salt', cursive;
   color: antiquewhite !important;
+}
+
+nav li a {
+  font-size: 2em;
 }
 
 .bigheader h1 {
