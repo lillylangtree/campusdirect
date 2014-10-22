@@ -1,0 +1,67 @@
+$color: #bbffcb;
+$color: #e36a5c;
+$headerbrand: #fed126;
+$offwhite: antiquewhite;
+$borderclr: #CA5959;
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,700,600);
+@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic|Open+Sans:400italic,600italic,700italic,400,700,600);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Rock+Salt);
+
+@import "compass";
+@import 'bootstrapover';
+
+@mixin paragraph-text {
+  color: black; font-size: 20px; margin: 1em;}
+
+#splash { margin-top: 4em}
+
+a,
+a:hover,
+a:focus,
+a:active,
+a.visited {
+	outline: 0;
+}
+
+p { @include paragraph-text; }
+
+html { overflow: hidden }
+body, div.container {
+  background-color : $color;
+}
+.page-splash 	{ background:white; color: black; }
+.page-location 	{ background:$color;  }
+
+select.form-control { background-color: #EA8B8B; color: $offwhite; margin-top:3em; border: 1px solid $borderclr}
+hr { border-top: 1px solid $borderclr}
+
+a.navbar-brand, a.navbar-brand:hover {
+	font-family: 'Rock Salt', cursive;
+	color: $offwhite !important;
+	
+	}
+	
+.bigheader {
+	h1 {
+			font: 700 67px/60px 'Rock Salt',Arial,sans-serif;			
+			margin: 14px 0px 20px;	
+			color: black;
+		}
+	}
+	
+.bigheader {
+	h2 { font-family: 'Open Sans', sans-serif;}
+	}
+	
+.subhead {
+		h2,h3{
+				font-family: 'Droid Serif',
+				'Helvetica Neue',Helvetica,Arial,sans-serif;
+				font-size: 25px;
+				font-style: italic;
+				font-weight: 700;
+				color: darkgrey;
+		}
+		}

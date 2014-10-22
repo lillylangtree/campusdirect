@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="myApp">
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Campus App</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link type="text/css" rel="stylesheet" href="css/app.css" />
+	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/styles.css" />
+	
+	
+	<script src="lib/angular/angular.min.js"></script>
+	<script src="lib/angular/angular-route.min.js"></script>
+    <script src="lib/angular/angular-resource.min.js"></script>
+	<script src="lib/angular/angular-touch.min.js"></script>
+	<script src="lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="lib/google/ng-map.min.js"></script>
+	<script src="cordova.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/directives.js"></script>
+	<script src="js/services.js"></script>
+	
+  </head>
+ <body  id='page-top' class="{{pageClass}}" ng-controller='mainController'>
+ <header >
+	
+	<nav  ng-hide="hidenav" class="navbar navbar-inverse" >
+		<div class="navbar-header" >
+			<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			
+			<a href="#page-top" class="navbar-brand " style='margin-left: 0.5em;margin-right:0.5em;'>Campus Direct</a>
+		</div>
+		<!-- Collection of nav links and other content for toggling -->
+		<div id="navbarCollapse" class="collapse navbar-collapse" >
+			<ul class="nav navbar-nav">
+				<li class="hidden">
+                        <a href="#page-top"></a>
+                </li>
+				<li><a class="" href="#about">about</a></li>
+				<li><a class="" href="#location">locate</a></li>
+			</ul>
+		</div>
+	</nav>
+	</header>
+	<div>
+		<div  ng-class="myVar" ng-view ></div>
+    </div>
+</body>
+<script>
+$( document ).ready(function() {
+   
+	$(document).on('click.nav','.navbar-collapse.in',function(e) {
+    if( $(e.target).is('a') || $(e.target).is('button')) {
+        $(this).collapse('hide');
+    }
+	});
+
+});  
+</script>
+ </html>
+

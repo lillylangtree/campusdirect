@@ -1,0 +1,21 @@
+
+<div class='container' >
+<h2 class='text-center'>Location: {{campus}} <img style="-webkit-user-select: none" src="http://maps.google.com/mapfiles/marker_greenA.png"></h2>
+<h3 class='text-center'>Directions To <img style="-webkit-user-select: none" src="http://maps.google.com/mapfiles/markerB.png"></h3>
+<div class='text-center'>
+
+<select 
+class="form-control" ng-model="mySelectedNode" ng-options="node.name for node in nodes">
+</select>
+<br>
+</div>
+<hr/>
+  Currently selected: {{ mySelectedNode }}
+  
+<div >
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<div class='text-center'>
+<button type="button" class="btn btn-warning btn-lg btn-block" ng-click="findDirections()"> Get Directions </button>
+</div>
+</div>
+</div>
