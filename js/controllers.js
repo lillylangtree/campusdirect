@@ -44,6 +44,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	 var TILE_SIZE = 256;
 	 
 	function calcRoute(map,start,end) {
+	  console.log("calcing route");
 	  var directionsDisplay = new google.maps.DirectionsRenderer();
 	
 	  var directionsService = new google.maps.DirectionsService();
@@ -55,6 +56,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	  };
 	  directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
+		  console.log("setting directions");
 		  directionsDisplay.setDirections(response);
 		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
 		  map.setZoom(14);
@@ -65,6 +67,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	}
 	$scope.$on('mapInitialized', function(event, map) {
       
+		console.log("map initialized");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
 			return $location.path('/error/' + message)
@@ -77,6 +80,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 			});
 	  	var position = aService.getPosition().then(
 			function(data) {
+				console.log("getting position");
 				$scope.position = data;
 				var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
 				var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
