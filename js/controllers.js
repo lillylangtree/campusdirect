@@ -5,7 +5,7 @@ appControllers.controller('mainController', ['$rootScope',function($rootScope) {
 appControllers.controller('splashController', ['$scope','$rootScope',function($scope,$rootScope) {
     $scope.message = "splash page";
 	$rootScope.hidenav = true;
-	alert(window.location.host);
+	
 	$scope.$parent.pageClass = 'page-splash';
 }]);
 appControllers.controller('aboutController', ['$scope','$rootScope',function($scope,$rootScope) {
