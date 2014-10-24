@@ -4,13 +4,12 @@
 <h3 class='text-center'>Directions To <img style="-webkit-user-select: none" src="http://maps.google.com/mapfiles/markerB.png"></h3>
 <div class='text-center'>
 
-<select 
-class="form-control" ng-model="mySelectedNode" ng-options="node.name for node in nodes">
+<select class="form-control browser-android" ng-model="mySelectedNode" ng-options="node.name for node in nodes">
 </select>
 <br>
 </div>
 <hr/>
-  Currently selected: {{ mySelectedNode }}
+  <p ng-show="local">Currently selected: {{ mySelectedNode }}</p>
   
 <div >
 <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->

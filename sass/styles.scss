@@ -34,6 +34,14 @@ body, div.container {
 .page-splash 	{ background:white; color: black; }
 .page-location 	{ background:$color;  }
 
+.browser-android {    
+		-webkit-appearance: listbox;
+		background-image: url(data:image/png;base64,R0lGODlhDQAEAIAAAAAAAP8A/yH5BAEHAAEALAAAAAANAAQAAAILhA+hG5jMDpxvhgIAOw==); /* a simple arrow img */
+		background-repeat: no-repeat;
+		background-position: right center;
+		padding-right: 20px;
+		}
+
 select.form-control { background-color: #EA8B8B; 
 						color: $offwhite;
 						height: 2.0em;
@@ -51,7 +59,9 @@ nav li a { font-size: 2em;}
 	
 .bigheader {
 	h1 {
-			font: 700 67px/60px 'Rock Salt',Arial,sans-serif;			
+			font: 700 67px/60px 'Rock Salt',Arial,sans-serif;	
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
 			margin: 14px 0px 20px;	
 			color: black;
 		}

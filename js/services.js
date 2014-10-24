@@ -47,6 +47,9 @@ appServices.factory("aService", function($window, $rootScope,$q) {
 						  },
 						   {name: "School of Computing",
 						  geo: { lat: 53.309159,lng: -6.224268}
+						  },
+						   {name: "School of Nursing, Midwifery & Health",
+						  geo: { lat: 53.3094405,lng: -6.2263024}
 						  }
 						]
 				  }			  

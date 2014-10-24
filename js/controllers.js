@@ -5,6 +5,7 @@ appControllers.controller('mainController', ['$rootScope',function($rootScope) {
 appControllers.controller('splashController', ['$scope','$rootScope',function($scope,$rootScope) {
     $scope.message = "splash page";
 	$rootScope.hidenav = true;
+	alert(window.location.host);
 	$scope.$parent.pageClass = 'page-splash';
 }]);
 appControllers.controller('aboutController', ['$scope','$rootScope',function($scope,$rootScope) {
@@ -15,6 +16,15 @@ appControllers.controller('aboutController', ['$scope','$rootScope',function($sc
 appControllers.controller('locationController', ['$scope','$rootScope','$location','aService',function($scope,$rootScope,$location,aService) {
     $scope.message = "location page";
 	$rootScope.hidenav = false;
+	$scope.local=false;
+	try {
+		var hostname = window.location.host;
+		if (hostname.indexOf('localhost') !== -1 )
+			$scope.local=true;
+		}
+	catch(ex) {
+		console.log(ex.message);
+		}
 	$scope.$parent.pageClass = 'page-location';
 	var location = aService.getLocations();
 	$scope.campus = location[0].organization.name;
@@ -35,11 +45,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	 
 	function calcRoute(map,start,end) {
 	  var directionsDisplay = new google.maps.DirectionsRenderer();
-	  var image = new google.maps.MarkerImage('images/man.png',
-                    new google.maps.Size(129, 42),
-                    new google.maps.Point(0,0),
-                    new google.maps.Point(18, 42)
-                );
+	
 	  var directionsService = new google.maps.DirectionsService();
 	  directionsDisplay.setMap(map);
 	  var request = {
@@ -51,6 +57,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		if (status == google.maps.DirectionsStatus.OK) {
 		  directionsDisplay.setDirections(response);
 		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
+		  map.setZoom(14);
 		}
 		  else { alert ("No Directions Found")
 		}
@@ -62,6 +69,12 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 			var message='invalid route';
 			return $location.path('/error/' + message)
 			}
+		google.maps.event.addDomListener(window, "resize", function() {
+			
+			 console.log("resized google map");
+			 google.maps.event.trigger(map, "resize");
+		
+			});
 	  	var position = aService.getPosition().then(
 			function(data) {
 				$scope.position = data;
