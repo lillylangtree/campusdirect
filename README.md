@@ -1,4 +1,9 @@
 CAMPUS DIRECT
+this application locates premises/buildings within an
+college/business park campus. Based on the users location
+it will direct the user to the building requested using
+google maps. It works in conjunction with a location server
+that records the geo location of buildings within a campus
 
 to install this application once cloned
 
