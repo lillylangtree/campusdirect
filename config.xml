@@ -23,6 +23,10 @@
 		<param name="key" value="[ a unique id for your app ]"/>
 	</feature>
   
+	<access origin="http://maps.google.com" />
+	<access origin="http://fonts.googleapis.com" />
+
+
 	<gap:plugin name="org.apache.cordova.battery-status" />
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media-capture" />
