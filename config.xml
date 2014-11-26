@@ -17,6 +17,12 @@
     <author href="http://www.nmm.ie" email="sean@nmm.ie">
         Sean Cahill
     </author>
+	
+	<feature name="debug-server" required="true">
+		<param name="domain" value="http://localhost:8000"/>
+		<param name="key" value="[ a unique id for your app ]"/>
+	</feature>
+  
 	<gap:plugin name="org.apache.cordova.battery-status" />
 	<gap:plugin name="org.apache.cordova.camera" />
 	<gap:plugin name="org.apache.cordova.media-capture" />

@@ -41,7 +41,7 @@ gulp.task('compass', function() {
 	.pipe(minifycss())
 	.pipe(gulp.dest('css'));
 });
-/*
+/* without compass
 gulp.task('styles', function() {
       return gulp.src('sass/*.scss')
         .pipe(sass({ style: 'expanded' }))

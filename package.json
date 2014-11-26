@@ -1,6 +1,6 @@
 {
   "name": "campusdirect",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "give directions to locations in a business or college campus",
   "main": "app.js",
   "scripts": {
