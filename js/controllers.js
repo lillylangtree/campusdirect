@@ -74,11 +74,13 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 			var message='invalid route';
 			return $location.path('/error/' + message)
 			}
+		if (window) {
 		google.maps.event.addDomListener(window, "resize", function() {			
 			 console.log("resized google map");
 			 google.maps.event.trigger(map, "resize");
 		
 			});
+		}
 	  	var position = aService.getPosition().then(
 			function(data) {
 				console.log("got position");
