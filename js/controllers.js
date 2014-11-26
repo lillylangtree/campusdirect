@@ -68,29 +68,23 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	  });
 	}
 	$scope.$on('mapInitialized', function(event, map) {
-      
-		alert("map initialized");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
 			return $location.path('/error/' + message)
 			}
-		google.maps.event.addDomListener(window, "resize", function() {
-			
+		google.maps.event.addDomListener(window, "resize", function() {			
 			 console.log("resized google map");
 			 google.maps.event.trigger(map, "resize");
 		
 			});
 	  	var position = aService.getPosition().then(
 			function(data) {
-				alert("getting position");
 				$scope.position = data;
 				var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
 				var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
 				map.setCenter(start);
 				//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
-				$scope.dublin = map.getCenter();
-
-				
+				$scope.dublin = map.getCenter();				
 				calcRoute(map,start,end);
 			},
 			function(data) {
