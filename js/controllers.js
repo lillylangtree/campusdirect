@@ -17,9 +17,10 @@ appControllers.controller('locationController', ['$scope','$rootScope','$locatio
     $scope.message = "location page";
 	$rootScope.hidenav = false;
 	$scope.local=false;
+	console.log("in location");
 	try {
 		var hostname = window.location.host;
-		alert(window.location.host);
+		console.log(window.location.host);
 		if (hostname.indexOf('localhost') !== -1 )
 			$scope.local=true;
 		}
