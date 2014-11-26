@@ -18,10 +18,6 @@
         Sean Cahill
     </author>
 	
-	<access origin="http://maps.google.com" />
-	<access origin="http://fonts.googleapis.com" />
-
-
 	<gap:plugin name="org.apache.cordova.device" />
 	<gap:plugin name="org.apache.cordova.device-motion" />
 	<gap:plugin name="org.apache.cordova.device-orientation" />

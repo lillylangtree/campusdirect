@@ -37,7 +37,7 @@ appControllers.controller('locationController', ['$scope','$rootScope','$locatio
 		var latlng = $scope.mySelectedNode.geo;
 		$rootScope.latlng = latlng;
 		$rootScope.positionlatlng = location[0].organization.geo;
-		alert($rootScope.positionlatlng.lat + " " + $rootScope.positionlatlng.lng);
+		console.log($rootScope.positionlatlng.lat + " " + $rootScope.positionlatlng.lng);
 		$location.url('/map' )
 		}
 }]);
@@ -47,7 +47,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	 var TILE_SIZE = 256;
 	 
 	function calcRoute(map,start,end) {
-	  alert("calcing route");
+	  console.log("calcing route");
 	  var directionsDisplay = new google.maps.DirectionsRenderer();
 	
 	  var directionsService = new google.maps.DirectionsService();
@@ -59,16 +59,17 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 	  };
 	  directionsService.route(request, function(response, status) {
 		if (status == google.maps.DirectionsStatus.OK) {
-		  alert("setting directions");
+		  console.log("setting directions");
 		  directionsDisplay.setDirections(response);
 		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
 		  map.setZoom(14);
 		}
-		  else { alert ("No Directions Found")
+		  else { alert("No Directions Found");
 		}
 	  });
 	}
 	$scope.$on('mapInitialized', function(event, map) {
+		console.log("initializing map");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
 			return $location.path('/error/' + message)
@@ -80,6 +81,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 			});
 	  	var position = aService.getPosition().then(
 			function(data) {
+				console.log("got position");
 				$scope.position = data;
 				var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
 				var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
