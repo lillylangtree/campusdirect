@@ -1,5 +1,5 @@
 var initialize = function() {
-
+	console.log("map initialize");
 	var pos = new google.maps.LatLng(53.307029,-6.221084)
 	var mapOptions = {
 		zoom: 17,
@@ -79,4 +79,7 @@ function error(msg) {
   console.log(msg);
 }
 
-window.onload = loadScript();
+document.addEventListener("deviceready", init, false);
+function init() {
+	initialize();
+}

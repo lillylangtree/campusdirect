@@ -68,7 +68,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		}
 	  });
 	}
-	$scope.$on('mapInitialized', function(event, map) {
+	$scope.$on('mapInitialized', function(event, map) { //from ng-map directive
 		console.log("initializing map");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
