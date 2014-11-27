@@ -7,11 +7,13 @@ appServices.factory("aService", function($rootScope,$q) {
 			console.log("getting position");
 			var deferred = $q.defer();
 			if (navigator.geolocation) {
+				console.log("got geo");
 				navigator.geolocation.getCurrentPosition(success, error, {timeout:10000,enableHighAccuracy: true});
 			} else {
 				alert('geo location not supported');
 			}
 			function success(position) {
+				console.log("success geo");
 				deferred.resolve(position.coords);
 			};
 			function error(msg) {

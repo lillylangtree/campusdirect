@@ -62,7 +62,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		  console.log("setting directions");
 		  directionsDisplay.setDirections(response);
 		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
-		  map.setZoom(14);
+		  map.setZoom(12);
 		}
 		  else { alert("No Directions Found");
 		}
