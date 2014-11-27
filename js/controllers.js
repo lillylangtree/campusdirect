@@ -75,7 +75,7 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 			return $location.path('/error/' + message)
 			}
 		if (window) {
-		google.maps.event.addDomListener(window, "resize", function() {			
+			google.maps.event.addDomListener(window, "resize", function() {			
 			 console.log("resized google map");
 			 google.maps.event.trigger(map, "resize");
 		

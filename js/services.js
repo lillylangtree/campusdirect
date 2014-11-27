@@ -1,9 +1,10 @@
 var appServices = angular.module('myServices', ['ngResource']);
 
 
-appServices.factory("aService", function($window, $rootScope,$q) {
+appServices.factory("aService", function($rootScope,$q) {
 	return {
 		getPosition: function() {
+			console.log("getting position");
 			var deferred = $q.defer();
 			if (navigator.geolocation) {
 				navigator.geolocation.getCurrentPosition(success, error, {timeout:10000,enableHighAccuracy: true});
