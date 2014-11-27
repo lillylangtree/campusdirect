@@ -7,6 +7,7 @@ appControllers.controller('splashController', ['$scope','$rootScope',function($s
 	$rootScope.hidenav = true;
 	
 	$scope.$parent.pageClass = 'page-splash';
+	
 }]);
 appControllers.controller('aboutController', ['$scope','$rootScope',function($scope,$rootScope) {
     $scope.message = "about page";
@@ -44,7 +45,9 @@ appControllers.controller('locationController', ['$scope','$rootScope','$locatio
 appControllers.controller('mapController', ['$scope','$rootScope','$location','aService',function($scope,$rootScope,$location,aService) {
     $scope.message = "map page";
 	$rootScope.hidenav = false;
-	 var TILE_SIZE = 256;
+	var map;
+	var TILE_SIZE = 256;
+	 
 	 
 	function calcRoute(map,start,end) {
 	  console.log("calcing route");
@@ -62,41 +65,45 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		  console.log("setting directions");
 		  directionsDisplay.setDirections(response);
 		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
-		  map.setZoom(12);
+		  
 		}
 		  else { alert("No Directions Found");
 		}
 	  });
 	}
-	$scope.$on('mapInitialized', function(event, map) { //from ng-map directive
+	
+	$scope.$on('mapInitialized', function(event, eventMap) { //from ng-map directive
 		console.log("initializing map");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
 			return $location.path('/error/' + message)
 			}
-		if (window) {
-			google.maps.event.addDomListener(window, "resize", function() {			
-			 console.log("resized google map");
-			 google.maps.event.trigger(map, "resize");
+		map = eventMap;
+		//if (window) {
+		//	google.maps.event.addDomListener(window, "resize", function() {			
+		//	 console.log("resized google map");
+		//	 google.maps.event.trigger(map, "resize");
 		
-			});
-		}
-	  	var position = aService.getPosition().then(
-			function(data) {
-				console.log("got position");
-				$scope.position = data;
-				var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
-				var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
-				map.setCenter(start);
-				//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
-				$scope.dublin = map.getCenter();				
-				calcRoute(map,start,end);
-			},
-			function(data) {
-			  $scope.position = "Failed: " + data.message;
-			}
-		);		
-    });
+		//	});
+		//}
+		
+		aService.getPosition().then(
+				function(data) {
+					console.log("got position");
+					$scope.position = data;
+					var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
+					var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
+					map.setCenter(start);
+					map.setZoom(14);
+					//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
+					$scope.dublin = map.getCenter();				
+					calcRoute(map,start,end);
+				},
+				function(data) {
+				  $scope.position = "Failed: " + data.message;
+				}
+			);		
+	});
 }]);
 appControllers.controller('errorController', ['$scope','$routeParams', function($scope,$routeParams) {
 
