@@ -1,14 +1,15 @@
-var appControllers = angular.module('myControllers', []);
+var appControllers = angular.module('myControllers', [ ]);
 appControllers.controller('mainController', ['$rootScope',function($rootScope) {
 	$rootScope.hidenav = false;
 }]);
 appControllers.controller('splashController', ['$scope','$rootScope',function($scope,$rootScope) {
     $scope.message = "splash page";
 	$rootScope.hidenav = true;
-	
+	console.log("splash controller");
 	$scope.$parent.pageClass = 'page-splash';
 	
 }]);
+
 appControllers.controller('aboutController', ['$scope','$rootScope',function($scope,$rootScope) {
     $scope.message = "about page";
 	$rootScope.hidenav = false;
@@ -42,11 +43,18 @@ appControllers.controller('locationController', ['$scope','$rootScope','$locatio
 		$location.url('/map' )
 		}
 }]);
-appControllers.controller('mapController', ['$scope','$rootScope','$location','aService',function($scope,$rootScope,$location,aService) {
+appControllers.controller('mapController', ['$scope','$rootScope','$location','aService','$q',function($scope,$rootScope,$location,aService,$q) {
     $scope.message = "map page";
 	$rootScope.hidenav = false;
 	var TILE_SIZE = 256;
-	 	 
+	var deferred = $q.defer();
+	var map; 
+	$scope.$on('mapInitialized', function(evt, evtMap) { 	
+		console.log("map initializing");
+		map = evtMap; 
+		deferred.resolve(); // proceed once have map
+	});
+	 
 	function calcRoute(map,start,end) {
 	  console.log("calcing route");
 	  var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -67,38 +75,25 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		  else { alert("No Directions Found");
 		}
 	  });
-	}
-	
-	$scope.$on('mapInitialized', function(event, map) { //from ng-map directive
-		console.log("initializing map");
-		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
-			var message='invalid route';
-			return $location.path('/error/' + message)
-			}
-		//if (window) {
-		//	google.maps.event.addDomListener(window, "resize", function() {			
-		//	 console.log("resized google map");
-		//	 google.maps.event.trigger(map, "resize");
-		
-		//	});
-		//}
-		
+	}	
+	deferred.promise.then(function() { // delay until map initialized
+		console.log('got map');
 		aService.getPosition().then(
-				function(data) {
-					console.log("got position");
-					$scope.position = data; // data contains geo position
-					var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
-					var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
-					map.setCenter(start);
-					//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
-					$scope.dublin = map.getCenter();				
-					calcRoute(map,start,end);
-				},
-				function(data) {
-				  $scope.position = "Failed: " + data.message;
-				}
-			);		
-	});
+			function(data) {
+				console.log("got position");
+				$scope.position = data; // data contains geo position
+				var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
+				var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
+				map.setCenter(start);
+				//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
+				$scope.dublin = map.getCenter();				
+				calcRoute(map,start,end);
+			},
+			function(data) {
+			  $scope.position = "Failed: " + data.message;
+			}
+		)});		
+
 }]);
 appControllers.controller('errorController', ['$scope','$routeParams', function($scope,$routeParams) {
 
