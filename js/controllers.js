@@ -45,10 +45,8 @@ appControllers.controller('locationController', ['$scope','$rootScope','$locatio
 appControllers.controller('mapController', ['$scope','$rootScope','$location','aService',function($scope,$rootScope,$location,aService) {
     $scope.message = "map page";
 	$rootScope.hidenav = false;
-	var map;
 	var TILE_SIZE = 256;
-	 
-	 
+	 	 
 	function calcRoute(map,start,end) {
 	  console.log("calcing route");
 	  var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -64,21 +62,19 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		if (status == google.maps.DirectionsStatus.OK) {
 		  console.log("setting directions");
 		  directionsDisplay.setDirections(response);
-		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);
-		  
+		  map.fitBounds(directionsDisplay.getDirections().routes[0].bounds);		  
 		}
 		  else { alert("No Directions Found");
 		}
 	  });
 	}
 	
-	$scope.$on('mapInitialized', function(event, eventMap) { //from ng-map directive
+	$scope.$on('mapInitialized', function(event, map) { //from ng-map directive
 		console.log("initializing map");
 		if ($rootScope.positionlatlng == undefined || $rootScope.positionlatlng == null) {
 			var message='invalid route';
 			return $location.path('/error/' + message)
 			}
-		map = eventMap;
 		//if (window) {
 		//	google.maps.event.addDomListener(window, "resize", function() {			
 		//	 console.log("resized google map");
@@ -90,11 +86,10 @@ appControllers.controller('mapController', ['$scope','$rootScope','$location','a
 		aService.getPosition().then(
 				function(data) {
 					console.log("got position");
-					$scope.position = data;
+					$scope.position = data; // data contains geo position
 					var start = new google.maps.LatLng($rootScope.positionlatlng.lat,$rootScope.positionlatlng.lng);
 					var end = new google.maps.LatLng($rootScope.latlng.lat,$rootScope.latlng.lng);
 					map.setCenter(start);
-					map.setZoom(14);
 					//map.setCenter(new google.maps.LatLng(53.307029,-6.221084));
 					$scope.dublin = map.getCenter();				
 					calcRoute(map,start,end);

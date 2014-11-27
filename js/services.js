@@ -11,6 +11,7 @@ appServices.factory("aService", function($rootScope,$q) {
 				var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 90000 };
 				navigator.geolocation.getCurrentPosition(success, error, options);
 			} else {
+				console.log("geo location not present or timed out");
 				alert('geo location not supported');
 			}
 			function success(position) {
