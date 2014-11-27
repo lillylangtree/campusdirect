@@ -8,7 +8,8 @@ appServices.factory("aService", function($rootScope,$q) {
 			var deferred = $q.defer();
 			if (navigator.geolocation) {
 				console.log("got geo");
-				navigator.geolocation.getCurrentPosition(success, error, {timeout:10000,enableHighAccuracy: true});
+				var options = { timeout: 31000, enableHighAccuracy: true, maximumAge: 90000 };
+				navigator.geolocation.getCurrentPosition(success, error, options);
 			} else {
 				alert('geo location not supported');
 			}
@@ -20,7 +21,7 @@ appServices.factory("aService", function($rootScope,$q) {
 			  //var s = document.querySelector('#status');
 			  //s.innerHTML = typeof msg == 'string' ? msg : "failed";
 			  //s.className = 'fail';
-			  
+			  console.log("failed geo");
 			  deferred.reject({message: "failed to find position"});
 			}
 			return deferred.promise;
